@@ -5,20 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserAuth {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String login;
+	private String username;
 	private String password;
 	private String role;
 	
-	public User() {
+	public UserAuth() {
 	}
 
-	public User(String login, String password, String role) {
-		this.login = login;
+	public UserAuth(String username, String password, String role) {
+		this.username = username;
 		this.password = password;
 		this.role = role;
 	}
@@ -31,12 +31,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -57,6 +57,6 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", password=" + password + ", role=" + role + "]";
+		return "UserAuth [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
 	}
 }

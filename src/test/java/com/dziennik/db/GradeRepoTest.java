@@ -79,5 +79,31 @@ class GradeRepoTest {
 		assertEquals(3l, subjecGrades.get(0).getIdsubject());
 		assertEquals(3l, subjecGrades.get(1).getIdsubject());
 	}
+	
+	@Test
+	public void distinctSubject() {
+		Grade g1 = new Grade(idpupil, 1l, 5);
+		Grade g2 = new Grade(idpupil, 2l, 2);
+		Grade g3 = new Grade(idpupil, 2l, 3);
+		Grade g4 = new Grade(idpupil, 3l, 3);
+		Grade g5 = new Grade(idpupil, 3l, 4);
+		Grade g6 = new Grade(102l, 3l, 2);
+		gradeRepo.saveAll(Arrays.asList(g1, g2, g3, g4, g5, g6));
+		
+		List<Long> subjecid = gradeRepo.getPupilDistinctSubject(idpupil);
+		
+		assertEquals(3, subjecid.size());
+		assertEquals(1l, subjecid.get(0));
+		assertEquals(2l, subjecid.get(1));
+		assertEquals(3l, subjecid.get(2));
+	}
+	
+	@Test
+	public void testDistinctWithoutGrades() {
+
+		List<Long> subjecid = gradeRepo.getPupilDistinctSubject(idpupil);
+		
+		assertEquals(0, subjecid.size());
+	}
 
 }

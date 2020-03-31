@@ -13,6 +13,10 @@ import com.dziennik.model.Grade;
 public interface GradeRepo extends JpaRepository<Grade, Long> {
 
 	List<Grade> findByIdpupil(Long idpupil);
+	
 	@Query(value = "From Grade where idpupil=:idpupil and idsubject=:idsubject")
 	List<Grade> findPupilSubjectGrade(@Param("idpupil")Long idpupil, @Param("idsubject")Long idsubject);
+	
+	@Query(value = "select distinct g.idsubject From Grade g where idpupil=:idpupil")
+	List<Long> getPupilDistinctSubject(Long idpupil);
 }

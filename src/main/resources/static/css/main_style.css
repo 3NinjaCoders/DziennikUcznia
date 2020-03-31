@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+nav{
+	background-color: yellow;
+	min-height: 30px;
+}
+
+
+
+#content{
+	background-color: #ad7fa8;
+	float:left;
+	width: 80%
+}
+
+#rightmenu{
+	background-color: #4e9a06;	
+	width: 20%;
+	float:right;
+}
+
+#servicemap{
+	background-color: #c17d11;	
+	width: 20%;
+	float:right;
+}
+
+footer{
+	clear:both;
+	background-color: black;
+	color: white;
+	min-height: 30px;
+}
+

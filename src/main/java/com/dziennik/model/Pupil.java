@@ -9,16 +9,16 @@ public class Pupil {
 	@Id
 	private Long id;
 	private Long idschoolclass;
-	private String firstaname;
+	private String firstname;
 	private String lastname;
 	
 	public Pupil() {
 	}
 
-	public Pupil(Long id, Long idschoolclass, String firstaname, String lastname) {
+	public Pupil(Long id, Long idschoolclass, String firstname, String lastname) {
 		this.id = id;
 		this.idschoolclass = idschoolclass;
-		this.firstaname = firstaname;
+		this.firstname = firstname;
 		this.lastname = lastname;
 	}
 
@@ -38,12 +38,12 @@ public class Pupil {
 		this.idschoolclass = idschoolclass;
 	}
 
-	public String getFirstaname() {
-		return firstaname;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirstaname(String firstaname) {
-		this.firstaname = firstaname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getLastname() {
@@ -56,7 +56,7 @@ public class Pupil {
 
 	@Override
 	public String toString() {
-		return "Pupil [id=" + id + ", idschoolclass=" + idschoolclass + ", firstaname=" + firstaname + ", lastname="
+		return "Pupil [id=" + id + ", idschoolclass=" + idschoolclass + ", firstname=" + firstname + ", lastname="
 				+ lastname + "]";
 	}
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+</head>
+
+<style> /* TESTOWO */
+
+table{
+	border-collapse: collapse;
+	border: 2px solid black;
+}
+
+td{
+	border: 1px solid black;
+	
+}
+</style>
+<body>
+	<nav th:replace="pupil/fragments/top :: top"></nav>
+	<section id="content">
+	<!-- ********************************************************************************** -->
+		<table>
+			<tr>
+				<td>Przedmiot</td>
+				<td>Średnia</td>
+				<td>Oceny</td>
+				<td th:each="i : ${grades}"></td>
+				
+			</tr>
+			<tr th:each="i : ${grades}" >
+				<td th:text="${i.subject}"></td>
+				<td th:text="${i.average}"></td>
+				<td th:each="x : ${i.grades}" th:text="${x}"></td>
+				
+			</tr>
+		</table>
+		
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside th:replace="pupil/fragments/rightmenu :: rightmenu"></aside>
+	<aside th:replace="pupil/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="pupil/fragments/footer :: footer"></footer>
+</body>
+</html>

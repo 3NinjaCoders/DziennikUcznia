@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+</head>
+<body>
+<nav th:fragment="top"> 
+	<span th:text="${session.pupil.firstname}"> </span> <span th:text="${session.pupil.lastname}"></span>
+</nav>
+</body>
+</html>

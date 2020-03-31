@@ -4,13 +4,17 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import com.dziennik.model.Grade;
 import com.dziennik.model.Pupil;
 import com.dziennik.model.SchoolClass;
 import com.dziennik.model.Subject;
 import com.dziennik.model.Teacher;
-import com.dziennik.model.User;
+import com.dziennik.model.UserAuth;
 
+@Service
 public class InitDB implements CommandLineRunner {
 	
 	private SchoolClassRepo schoolClassRepo;
@@ -19,17 +23,23 @@ public class InitDB implements CommandLineRunner {
 	private SubjectRepo subjectRepo;
 	private PupilRepo pupilRepo;
 	private UserRepo userRepo;
+	private PasswordEncoder passwordEndcoder;
 	
 	@Autowired
-	public InitDB(SchoolClassRepo klasaRepo, TeacherRepo nauczycielRepo, GradeRepo ocenaRepo, SubjectRepo przedmiotRepo,
-			PupilRepo uczenRepo, UserRepo uzytkownikRepo) {
-		this.schoolClassRepo = klasaRepo;
-		this.teacherRepo = nauczycielRepo;
-		this.gradeRepo = ocenaRepo;
-		this.subjectRepo = przedmiotRepo;
-		this.pupilRepo = uczenRepo;
-		this.userRepo = uzytkownikRepo;
+	public InitDB(SchoolClassRepo schoolClassRepo, TeacherRepo teacherRepo, GradeRepo gradeRepo,
+			SubjectRepo subjectRepo, PupilRepo pupilRepo, UserRepo userRepo, PasswordEncoder passwordEndcoder) {
+		this.schoolClassRepo = schoolClassRepo;
+		this.teacherRepo = teacherRepo;
+		this.gradeRepo = gradeRepo;
+		this.subjectRepo = subjectRepo;
+		this.pupilRepo = pupilRepo;
+		this.userRepo = userRepo;
+		this.passwordEndcoder = passwordEndcoder;
 	}
+
+
+
+
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -41,19 +51,19 @@ public class InitDB implements CommandLineRunner {
 		this.userRepo.deleteAll();
 		
 				
-		User u1 = new User("Jan123", "123", "NAUCZYCIEL");
-		User u2 = new User("Adam123", "123", "NAUCZYCIEL");
-		User u3 = new User("Jola123", "123", "NAUCZYCIEL");
-		User u4 = new User("Kasia123", "123", "NAUCZYCIEL");
+		UserAuth u1 = new UserAuth("Jan123", passwordEndcoder.encode("123"), "TEACHER");
+		UserAuth u2 = new UserAuth("Adam123", passwordEndcoder.encode("123"), "TEACHER");
+		UserAuth u3 = new UserAuth("Jola123", passwordEndcoder.encode("123"), "TEACHER");
+		UserAuth u4 = new UserAuth("Kasia123", passwordEndcoder.encode("123"), "TEACHER");
 		
-		User u01 = new User("uczen1", "123", "UCZEN");
-		User u02 = new User("uczen2", "123", "UCZEN");
-		User u03 = new User("uczen3", "123", "UCZEN");
-		User u04 = new User("uczen4", "123", "UCZEN");
-		User u05 = new User("uczen5", "123", "UCZEN");
-		User u06 = new User("uczen6", "123", "UCZEN");
-		User u07 = new User("uczen7", "123", "UCZEN");
-		User u08 = new User("uczen8", "123", "UCZEN");
+		UserAuth u01 = new UserAuth("uczen1", passwordEndcoder.encode("123"), "PUPIL");
+		UserAuth u02 = new UserAuth("uczen2", passwordEndcoder.encode("123"), "PUPIL");
+		UserAuth u03 = new UserAuth("uczen3", passwordEndcoder.encode("123"), "PUPIL");
+		UserAuth u04 = new UserAuth("uczen4", passwordEndcoder.encode("123"), "PUPIL");
+		UserAuth u05 = new UserAuth("uczen5", passwordEndcoder.encode("123"), "PUPIL");
+		UserAuth u06 = new UserAuth("uczen6", passwordEndcoder.encode("123"), "PUPIL");
+		UserAuth u07 = new UserAuth("uczen7", passwordEndcoder.encode("123"), "PUPIL");
+		UserAuth u08 = new UserAuth("uczen8", passwordEndcoder.encode("123"), "PUPIL");
 		this.userRepo.saveAll(Arrays.asList(u1, u2, u3, u4, u01, u02, u03, u04, u05, u06, u07, u08));
 		
 		Subject p1 = new Subject(u1.getId(), "Matematyka");
@@ -81,6 +91,14 @@ public class InitDB implements CommandLineRunner {
 		this.pupilRepo.save(new Pupil(u06.getId(), k2.getIdschoolclass(), "Anna", "Dymarska"));
 		this.pupilRepo.save(new Pupil(u07.getId(), k3.getIdschoolclass(), "Ola", "Jakubowska"));
 		this.pupilRepo.save(new Pupil(u08.getId(), k3.getIdschoolclass(), "Mateusz", "Kowalski"));
+		
+		
+		this.gradeRepo.save(new Grade(u01.getId(), p1.getId(), 5.0));
+		this.gradeRepo.save(new Grade(u01.getId(), p1.getId(), 2.0));
+		this.gradeRepo.save(new Grade(u01.getId(), p1.getId(), 3.5));
+		this.gradeRepo.save(new Grade(u01.getId(), p2.getId(), 4.5));
+		this.gradeRepo.save(new Grade(u01.getId(), p2.getId(), 4));
+		this.gradeRepo.save(new Grade(u01.getId(), p3.getId(), 5));
 		
 	}
 	
