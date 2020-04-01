@@ -38,26 +38,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("/home.html").permitAll()
+			
 			.antMatchers("/teacher/**").hasRole("TEACHER")
 			.antMatchers("/pupil/**").hasRole("PUPIL")
-
-			.and()
-			.headers()
-			.frameOptions()
-			.sameOrigin()
-			
+			.antMatchers("/director/**").hasRole("DIRECTOR")
+			.antMatchers("/home.html").permitAll()			
 			
 			.and()
 			.formLogin()
-			.loginPage("/").permitAll()
+			.loginPage("/home").permitAll()
 			.successHandler(customAuthenticationHandler)
-			.failureForwardUrl("/invalidcredential")
+			.failureForwardUrl("/err")
 			.usernameParameter("username")
 			.passwordParameter("password")
 		
 			.and()
-			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
+			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+			.and()
+			.exceptionHandling().accessDeniedPage("/home");
 	}
 	
 	

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+</head>
+<body>
+	<nav th:replace="director/fragments/top :: top"></nav>
+	<section id="content">
+	<!-- ********************************************************************************** -->
+		
+		Dodaj Ucznia
+		<form th:action="@{/director/addpupil}" method="post">
+			<label for="firstname">imię</label>
+			<input type="text" id="firstname" name="firstname" required><br>
+			<label for="lastname">imię</label>
+			<input type="text" id="lastname" name="lastname" required><br>
+			
+			<label for="idschoolclass">klasa</label>
+			<select id="idschoolclass" name="idschoolclass" required>
+				<option th:each="i : ${allClasses}" th:value="${i.idschoolclass}" th:text="${i.name}"></option>
+			</select><br>
+			
+			<button type="submit">Dodaj</button>
+		</form>
+			
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside th:replace="director/fragments/rightmenu :: rightmenu"></aside>
+	<aside th:replace="teacher/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+</body>
+</html>

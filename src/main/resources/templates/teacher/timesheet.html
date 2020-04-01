@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+<link rel="stylesheet" type="text/css" href="/css/timesheet_style.css" />
+</head>
+
+<style> /* TESTOWO */
+
+</style>
+<body>
+	<nav th:replace="teacher/fragments/top :: top"></nav>
+	
+	<section id="content">
+	<!-- ********************************************************************************** -->
+		
+			<p th:text="${currentmonthn}"></p>
+			<div th:each="i : ${tsv}">
+			<form th:action="@{/teacher/timesheet}" method="post">
+				<table>
+				 	<tr>				
+					<td th:text="${i.name}"></td>
+					<td th:each="x : ${i.value}">
+					
+						<input class="present" name="value" type="number" min="-1" max="1" step="1" th:value="${x}">
+					</td>
+					<td>
+						<input type="hidden" name="idpupil" th:value="${i.idpupil}">
+						<input type="hidden" name="idclass" th:value="${idclass}">
+						<input type="hidden" name="idteacher" th:value="${idteacher}">
+						<input type="hidden" name="mon" th:value="${mon}">
+						<input type="hidden" name="year" th:value="${year}">
+						<button type="submit">dodaj</button>
+					</td>
+				
+					</tr>
+				</table>
+				</form>
+			</div>
+			
+		
+
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside id="rightmenu" th:replace="teacher/fragments/rightmenu :: rightmenu"></aside>
+	<aside id="servicemap" th:replace="teacher/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+</head>
+<body>
+	<aside th:fragment="rightmenu"> 
+		<div id="rightmenu" >
+			<a th:href="@{/director/addclass}">Dodaj klasę</a><br>
+			<a th:href="@{/director/addpupil}">Dodaj Ucznia</a><br>
+			<a th:href="@{/director/addteacher}">Dodaj Nauczyciela</a><br>
+			<a th:href="@{/director/timetableall}">Timetable</a><br>
+		</div>
+		
+	</aside>
+</body>
+</html>

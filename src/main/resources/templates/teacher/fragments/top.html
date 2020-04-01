@@ -6,6 +6,7 @@
 </head>
 <body>
 <nav th:fragment="top"> 
+	<a th:href="@{/logout}">Wyloguj</a>
 	<span th:text="${session.teacher.firstname}"> </span> <span th:text="${session.teacher.lastname}"></span>
 </nav>
 </body>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+</head>
+
+<body>
+	<nav th:replace="pupil/fragments/top :: top"></nav>
+	<section id="content">
+	<!-- ********************************************************************************** -->
+		<table>
+			<tr>
+				<td>Przedmiot</td>
+				<td>Nauczyciel</td>
+				<td th:each="i : ${#numbers.sequence(1, lenMon)}" th:text="${i}"></td>
+			</tr>
+			<tr th:each="i : ${tpv_list}" >
+				<td th:text="${i.subjectname}"></td>
+				<td th:text="${i.teachername}"></td>
+				<td th:each="x : ${i.value}" th:text="${x}"></td>
+				
+			</tr>
+		</table>
+		
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside th:replace="pupil/fragments/rightmenu :: rightmenu"></aside>
+	<aside th:replace="pupil/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="pupil/fragments/footer :: footer"></footer>
+</body>
+</html>

@@ -7,4 +7,5 @@ import com.dziennik.model.Subject;
 
 @Repository
 public interface SubjectRepo extends JpaRepository<Subject, Long> {
+	Subject findByIdteacher(Long idteacher);
 }

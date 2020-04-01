@@ -45,6 +45,8 @@ public class PupilGradesController {
 			grades.add(gv);
 		}
 		
+
+		
 		model.addAttribute("grades", grades);
 		return "pupil/home";
 	}

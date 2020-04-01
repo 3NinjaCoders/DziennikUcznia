@@ -20,6 +20,10 @@ public class Subject {
 		this.idteacher = idteacher;
 		this.name = name;
 	}
+	
+	public Subject(String name) {
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;

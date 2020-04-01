@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+</head>
+<body>
+	<nav th:replace="director/fragments/top :: top"></nav>
+	<section id="content">
+	<!-- ********************************************************************************** -->
+
+		tiemtable
+	
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside th:replace="director/fragments/rightmenu :: rightmenu"></aside>
+	<aside th:replace="teacher/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+</body>
+</html>

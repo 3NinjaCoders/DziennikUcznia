@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+</head>
+<body>
+	<nav th:replace="director/fragments/top :: top"></nav>
+	<section id="content">
+	<!-- ********************************************************************************** -->
+		Dodaj klasę
+		<p th:text="${message}">
+		<form th:action="@{/director/addclass}" method="post" th:object="${schoolClass}">
+			<label for="name">Nazwa klasy</label>
+			<input type="text" id="name" name="name" th:field="*{name}" required><br>
+			<label for="year">Rocznik</label>
+			<input type="number" min="2019" max="2500" step="1" id="year" name="year" th:field="*{year}" required><br>
+			<button type="submit">Dodaj</button>
+		</form>
+		
+		Wszystkie klasy
+		<table>
+			<tr th:each="i, it : ${class_list}">
+				<td th:text="${it.count}"></td>
+				<td th:text="${i.name}"></td>
+				<td th:text="${i.year}"></td>
+			</tr>
+		</table>
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside th:replace="director/fragments/rightmenu :: rightmenu"></aside>
+	<aside th:replace="teacher/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+</body>
+</html>

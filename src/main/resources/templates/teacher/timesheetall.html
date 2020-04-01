@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+</head>
+
+<style> /* TESTOWO */
+
+</style>
+<body>
+	<nav th:replace="teacher/fragments/top :: top"></nav>
+	
+	<section id="content">
+	<!-- ********************************************************************************** -->
+		<div th:if="${classid.isEmpty() == false}">
+			<a th:each="i : ${classid}" th:href="@{'/teacher/timesheet/' + ${idteacher} + '/' + ${i.idschoolclass}}" th:text="${i.name + '(' + i.year + ')'}"></a><br>
+		</div>
+
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside id="rightmenu" th:replace="teacher/fragments/rightmenu :: rightmenu"></aside>
+	<aside id="servicemap" th:replace="teacher/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+</body>
+</html>

@@ -73,7 +73,7 @@ public class SchoolClassController {
 		model.addAttribute("idsubject", subject.getId());
 		model.addAttribute("idclass", idclass);
 		model.addAttribute("allPupils", allPupils);
-		return "/teacher/class";
+		return "teacher/class";
 	}
 	
 	private String gradesList(Long pupilId, Long idsubject){

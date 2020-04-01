@@ -50,4 +50,5 @@ public class HomeController {
 		
 		return "redirect:/teacher/home";
 	}
+
 }

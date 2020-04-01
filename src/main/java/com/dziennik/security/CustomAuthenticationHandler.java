@@ -19,12 +19,15 @@ public class CustomAuthenticationHandler extends SimpleUrlAuthenticationSuccessH
 	 public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
 	      String pupilTargetUrl = "/pupil/setsession";
 	      String teacherTargetUrl = "/teacher/setsession";
+	      String directorTargetUrl = "/director/home";
 	      Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 	      if (roles.contains("ROLE_TEACHER")) {
 	         getRedirectStrategy().sendRedirect(request, response, teacherTargetUrl);
 	      } else if (roles.contains("ROLE_PUPIL")) {
 	         getRedirectStrategy().sendRedirect(request, response, pupilTargetUrl);
-	      } else {
+	      }else if (roles.contains("ROLE_DIRECTOR")) {
+		         getRedirectStrategy().sendRedirect(request, response, directorTargetUrl);
+		  } else {
 	         super.onAuthenticationSuccess(request, response, authentication);
 	         return;
 	      }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+</head>
+
+<body>
+	<nav th:replace="director/fragments/top :: top"></nav>
+	<section id="content">
+	<!-- ********************************************************************************** -->
+		Dodaj Nauczyciela
+		<form th:action="@{/director/addteacher}" method="post">
+			<label for="firstname">imię</label>
+			<input type="text" id="firstname" name="firstname" required><br>
+			<label for="lastname">Nazwisko</label>
+			<input type="text" id="lastname" name="lastname" required><br>
+			
+			<p id="message" th:if="${message != null}" th:text="${message}"></p>
+			<label for="idsubject">klasa</label>
+			<select id="idsubject" name="idsubject" required>
+				<option th:each="i : ${freeVacation}" th:value="${i.id}" th:text="${i.name}"></option>
+			</select><br>
+			
+			<button th:if="${message != null}" id="button" type="submit" disabled>Dodaj</button>
+			<button th:unless="${message != null}" id="button" type="submit">Dodaj</button>
+		</form>
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside th:replace="director/fragments/rightmenu :: rightmenu"></aside>
+	<aside th:replace="teacher/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+<script>
+
+document.getElementById("message").onload = function(){
+	var x = document.getElementById("message");
+	if(x == null || x == "")
+		document.getElementById("button").disabled = true;	
+}
+
+</script>
+</body>
+</html>

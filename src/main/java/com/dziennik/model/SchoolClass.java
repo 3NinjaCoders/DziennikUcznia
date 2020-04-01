@@ -12,13 +12,15 @@ public class SchoolClass {
 	private Long idschoolclass;
 	private String name;
 	private String year;
+	private int hourperweek;
 	
 	public SchoolClass() {
 	}
 
-	public SchoolClass( String name, String year) {
+	public SchoolClass(String name, String year, int hourperweek) {
 		this.name = name;
 		this.year = year;
+		this.hourperweek = hourperweek;
 	}
 
 	public Long getIdschoolclass() {
@@ -45,8 +47,17 @@ public class SchoolClass {
 		this.year = year;
 	}
 
+	public int getHourperweek() {
+		return hourperweek;
+	}
+
+	public void setHourperweek(int hourperweek) {
+		this.hourperweek = hourperweek;
+	}
+
 	@Override
 	public String toString() {
-		return "SchoolClass [idschoolclass=" + idschoolclass + ", name=" + name + ", year=" + year + "]";
+		return "SchoolClass [idschoolclass=" + idschoolclass + ", name=" + name + ", year=" + year + ", hourperweek="
+				+ hourperweek + "]";
 	}
 }
