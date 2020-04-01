@@ -38,15 +38,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			
+			.antMatchers("/home.html").permitAll()	
 			.antMatchers("/teacher/**").hasRole("TEACHER")
 			.antMatchers("/pupil/**").hasRole("PUPIL")
 			.antMatchers("/director/**").hasRole("DIRECTOR")
-			.antMatchers("/home.html").permitAll()			
+					
 			
 			.and()
 			.formLogin()
-			.loginPage("/home").permitAll()
+			.loginPage("/").permitAll()
 			.successHandler(customAuthenticationHandler)
 			.failureForwardUrl("/err")
 			.usernameParameter("username")
@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
 			.and()
-			.exceptionHandling().accessDeniedPage("/home");
+			.exceptionHandling().accessDeniedPage("/");
 	}
 	
 	
