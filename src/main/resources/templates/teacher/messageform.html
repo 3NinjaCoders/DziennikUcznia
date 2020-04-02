@@ -25,15 +25,13 @@
 		</form>
 		
 		<table>
-			<tr th:each="i : ${chat}" th:if="${i.fromid == me}" class="myMsg">
-				<td th:text="${i.timestampmsg}"></td>
-				<td>Me</td>
-				<td th:text="${i.msg}"></td>
-			</tr>
-			<tr th:each="i : ${chat}" th:unless="${i.fromid == me}" class="NotmyMsg">
-				<td th:text="${i.timestampmsg}"></td>
-				<td th:text="${pupilName}"></td>
-				<td th:text="${i.msg}"></td>
+			<tr th:each="i : ${chat}"  >
+				<td th:if="${i.fromid == me}" class="myMsg" th:text="${i.timestampmsg}"></td>
+				<td th:unless="${i.fromid == me}" class="NotmyMsg" th:text="${i.timestampmsg}"></td>
+				<td th:if="${i.fromid == me}" class="myMsg">Me</td>
+				<td th:unless="${i.fromid == me}" class="NotmyMsg" th:text="${pupilName}"></td>
+				<td th:if="${i.fromid == me}" class="myMsg" th:text="${i.msg}"></td>
+				<td th:unless="${i.fromid == me}" class="NotmyMsg" th:text="${i.msg}"></td>
 			</tr>
 		</table>
 	

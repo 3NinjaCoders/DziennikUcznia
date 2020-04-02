@@ -16,11 +16,10 @@ public interface MessageRepo extends JpaRepository<Message, Long> {
 	Boolean newMessage(@Param("fromid") Long fromid,
 						@Param("toid") Long toid);
 	
-	@Query(value = "From Message where (fromid=:person1 and toid=:person2) or (fromid=:person2 and toid=:person1) ORDER BY timestampmsg ")
+	@Query(value = "From Message m where ((m.fromid=:person1 and m.toid=:person2) or (m.fromid=:person2 and m.toid=:person1)) ORDER BY m.timestampmsg DESC")
 	List<Message> findChat(@Param("person1") Long person1,
 							@Param("person2") Long person2);
-	
-	
+
 	@Query(value = "select new java.lang.Boolean(count(*) > 0 ) from Message where toid=:toid and isread=1")
 	Boolean amIHaveMassage(@Param("toid") Long toid);
 }

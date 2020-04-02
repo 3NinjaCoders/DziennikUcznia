@@ -1,6 +1,7 @@
 package com.dziennik.uczen;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -62,13 +63,7 @@ public class TeacherMsgListController {
 		
 		List<Message> chat = messageRepo.findChat(me.getId(), teacher.getId());
 		
-		for(Message m : chat) 
-		{
-			if(!m.getFromid().equals(me.getId()))
-				m.setIsread(0);
-		}
-		messageRepo.saveAll(chat);
-		
+		chat.sort((t1, t2) -> t1.getTimestampmsg().compareTo(t2.getTimestampmsg()));
 		model.addAttribute("ismessge", eventService.chceckMessages(me.getId()));
 		model.addAttribute("me", me.getId());
 		model.addAttribute("idteacher", teacher.getId());

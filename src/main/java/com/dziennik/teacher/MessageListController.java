@@ -67,7 +67,7 @@ public class MessageListController {
 				m.setIsread(0);
 		}
 		messageRepo.saveAll(chat);
-		
+	
 		model.addAttribute("ismessge", eventService.chceckMessages(me.getId()));
 		model.addAttribute("me", me.getId());
 		model.addAttribute("idpupil", pupil.getId());

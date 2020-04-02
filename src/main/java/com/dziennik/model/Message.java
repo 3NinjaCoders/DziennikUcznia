@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-public class Message {
+public class Message implements Comparable<Message> {
 
 	@Id
 	@GeneratedValue
@@ -85,5 +85,18 @@ public class Message {
 	public String toString() {
 		return "Message [id=" + id + ", fromid=" + fromid + ", toid=" + toid + ", timestampmsg=" + timestampmsg
 				+ ", isread=" + isread + ", msg=" + msg + "]";
+	}
+
+	@Override
+	public int compareTo(Message arg0) {
+		
+		long l1 = this.timestampmsg.getTime();
+	    long l2 = arg0.timestampmsg.getTime();
+	    if (l2 > l1)
+	    return 1;
+	    else if (l1 > l2)
+	    return -1;
+	    else
+	    return 0;
 	}
 }
