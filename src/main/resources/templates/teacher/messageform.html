@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+<link rel="stylesheet" type="text/css" href="/css/message_style.css" />
+</head>
+
+<style> /* TESTOWO */
+
+</style>
+<body>
+	<nav th:replace="teacher/fragments/top :: top"></nav>
+	
+	<section id="content">
+	<!-- ********************************************************************************** -->
+	
+		<p ><span>Rozmowa z: </span><span th:text="${pupilName}"></span></p>
+		<form th:action="@{/teacher/message}" method="post">
+			<label for="msg">Treść</label>
+			<textarea id="contentmsg" name="msg" required></textarea><br>
+			<input type="hidden" name="toid" th:value="${idpupil}">
+			<button type="submit">Wyślij</button>
+		</form>
+		
+		<table>
+			<tr th:each="i : ${chat}" th:if="${i.fromid == me}" class="myMsg">
+				<td th:text="${i.timestampmsg}"></td>
+				<td>Me</td>
+				<td th:text="${i.msg}"></td>
+			</tr>
+			<tr th:each="i : ${chat}" th:unless="${i.fromid == me}" class="NotmyMsg">
+				<td th:text="${i.timestampmsg}"></td>
+				<td th:text="${pupilName}"></td>
+				<td th:text="${i.msg}"></td>
+			</tr>
+		</table>
+	
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside id="rightmenu" th:replace="teacher/fragments/rightmenu :: rightmenu"></aside>
+	<aside id="servicemap" th:replace="teacher/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+</body>
+</html>

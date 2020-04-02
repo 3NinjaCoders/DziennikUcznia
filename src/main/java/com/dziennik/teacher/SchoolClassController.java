@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.dziennik.EventService;
 import com.dziennik.db.GradeRepo;
 import com.dziennik.db.PupilRepo;
 import com.dziennik.db.SchoolClassRepo;
@@ -33,19 +34,20 @@ public class SchoolClassController {
 	private SubjectRepo subjectRepo;
 	private GradeRepo gradeRepo;
 	private SchoolClassRepo schoolClassRepo;
+	private EventService eventService;
 	
 	@Autowired
 	public SchoolClassController(PupilRepo pupilRepo, SubjectRepo subjectRepo, GradeRepo gradeRepo,
-			SchoolClassRepo schoolClassRepo) {
+			SchoolClassRepo schoolClassRepo, EventService eventService) {
 		this.pupilRepo = pupilRepo;
 		this.subjectRepo = subjectRepo;
 		this.gradeRepo = gradeRepo;
 		this.schoolClassRepo = schoolClassRepo;
+		this.eventService = eventService;
 	}
-	
+
 	@PostMapping("/teacher/showclass")
 	public String addGrade(NewGrade ng) {
-		System.out.println(ng);
 		gradeRepo.save(new Grade(ng.getIdpupil(), ng.getIdsubject(), ng.getGrade()));
 		return "redirect:/teacher/showclass/"+ng.getIdclass();
 	}
@@ -73,6 +75,7 @@ public class SchoolClassController {
 		model.addAttribute("idsubject", subject.getId());
 		model.addAttribute("idclass", idclass);
 		model.addAttribute("allPupils", allPupils);
+		model.addAttribute("ismessge", eventService.chceckMessages(me.getId()));
 		return "teacher/class";
 	}
 	

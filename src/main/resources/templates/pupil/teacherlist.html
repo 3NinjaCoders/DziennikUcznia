@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+<link rel="stylesheet" type="text/css" href="/css/message_style.css" />
+</head>
+
+<body>
+	<nav th:replace="pupil/fragments/top :: top"></nav>
+	<section id="content">
+	<!-- ********************************************************************************** -->
+
+			<table>
+				<tr th:each="i ,it : ${tmv_list}">
+					<td th:text="${it.count}"></td>
+					<td th:if="${i.hasNewMessage == 1}"  class="ismsg"> (wiadomosc)</td>
+					<td th:unless="${i.hasNewMessage == 1}"  class="isnmsg"> (brak n)</td>
+					<td th:text="${i.teacherName}"></td>
+					<td th:text="${i.subject}"></td>
+					<td>
+						<a th:href="@{'/pupil/message/' + ${i.idteacher}}">Wiadomość</a>
+					</td>
+				</tr>	
+			</table>
+		
+	<!-- ********************************************************************************** -->
+	</section>
+	
+	<aside th:replace="pupil/fragments/rightmenu :: rightmenu"></aside>
+	<aside th:replace="pupil/fragments/servicemap :: servicemap"></aside>
+	<footer th:replace="pupil/fragments/footer :: footer"></footer>
+</body>
+</html>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.dziennik.EventService;
 import com.dziennik.db.GradeRepo;
 import com.dziennik.db.SubjectRepo;
 import com.dziennik.model.Grade;
@@ -23,12 +24,16 @@ public class PupilGradesController {
 	private GradeRepo gradeRepo;
 	@Autowired
 	private SubjectRepo subjectRepo;
+	@Autowired
+	private EventService eventService;
 	
 	@GetMapping("/pupil/home")
 	public String pupilhome(Model model, HttpSession session) {
+		Pupil pupil = (Pupil) session.getAttribute("pupil");
+		model.addAttribute("ismessge", eventService.chceckMessages(pupil.getId()));
 		List<GradesView> grades = new ArrayList<>();
 		
-		Pupil pupil = (Pupil) session.getAttribute("pupil");
+		
 		List<Long> subjectId = gradeRepo.getPupilDistinctSubject(pupil.getId());
 		
 		if(subjectId.isEmpty())

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.dziennik.EventService;
 import com.dziennik.db.PupilRepo;
 import com.dziennik.db.SchoolClassRepo;
 import com.dziennik.db.TimesheetRepo;
@@ -32,6 +33,8 @@ public class TimesheetTeacherController {
 	private SchoolClassRepo schoolClassRepo;
 	@Autowired
 	private PupilRepo pupilRepo;
+	@Autowired
+	private EventService eventService;
 	
 
 	@GetMapping("/teacher/timesheetall")
@@ -40,6 +43,7 @@ public class TimesheetTeacherController {
 		
 		List<SchoolClass> classid = schoolClassRepo.findAll();
 		
+		model.addAttribute("ismessge", eventService.chceckMessages(me.getId()));
 		model.addAttribute("classid", classid);
 		model.addAttribute("idteacher", me.getId());
 		return "teacher/timesheetall";
@@ -48,7 +52,9 @@ public class TimesheetTeacherController {
 	@GetMapping("/teacher/timesheet/{idteacher}/{idclass}")
 	public String showClassTimesheet(@PathVariable("idteacher") Long idt,
 										@PathVariable("idclass") Long idc,
-										Model model) {
+										Model model,
+										HttpSession session) {
+		Teacher me = (Teacher) session.getAttribute("teacher");
 		
 		List<Pupil> pupil_list = pupilRepo.findByIdschoolclass(idc);
 		
@@ -69,6 +75,7 @@ public class TimesheetTeacherController {
 		model.addAttribute("idclass", idc);
 		model.addAttribute("mon", mon);
 		model.addAttribute("year", year);
+		model.addAttribute("ismessge", eventService.chceckMessages(me.getId()));
 		return "teacher/timesheet";
 	}
 	

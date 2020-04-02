@@ -24,7 +24,7 @@
 					<td th:text="${i.name}"></td>
 					<td th:each="x : ${i.value}">
 					
-						<input class="present" name="value" type="number" min="-1" max="1" step="1" th:value="${x}">
+						<input class="present" name="value" type="number" min="0" max="2" step="1" th:value="${x}">
 					</td>
 					<td>
 						<input type="hidden" name="idpupil" th:value="${i.idpupil}">

@@ -8,7 +8,10 @@
 	<aside th:fragment="rightmenu"> 
 		<div id="rightmenu" >
 			
-			<a th:href="@{/teacher/timesheetall}">Lista Obecności</a> 
+			<a th:href="@{/teacher/timesheetall}">Lista Obecności</a> <br>
+			<a th:href="@{/teacher/home}">Strong Głowna</a><br><br>
+			
+			<p th:if="${ismessge}" style="color:red; font-weight:bold">Masz wiadomość</p>
 		</div>
 		
 	</aside>

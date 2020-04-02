@@ -7,8 +7,11 @@
 <body>
 	<aside th:fragment="rightmenu"> 
 		<div id="rightmenu" >
-			<a th:href="@{/pupil/home}">oceny</a>
-			<a th:href="@{/pupil/timesheet}">Obecność</a>
+			<a th:href="@{/pupil/home}">oceny</a><br>
+			<a th:href="@{/pupil/timesheet}">Obecność</a><br>
+			<a th:href="@{/pupil/teacherlist}">Wiadomości</a><br><br>
+			
+			<p th:if="${ismessge}" style="color:red; font-weight:bold">Masz wiadomość</p>
 		</div>
 		
 	</aside>

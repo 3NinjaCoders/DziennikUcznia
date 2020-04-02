@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.dziennik.EventService;
 import com.dziennik.db.SubjectRepo;
 import com.dziennik.db.TeacherRepo;
 import com.dziennik.db.TimesheetRepo;
@@ -30,6 +31,8 @@ public class PupilTimesheetController {
 	private TeacherRepo teacherRepo;
 	@Autowired
 	private SubjectRepo subjectRepo;
+	@Autowired
+	private EventService eventService;
 	
 	@GetMapping("/pupil/timesheet")
 	public String timesheet(Model model, HttpSession session) {
@@ -51,6 +54,7 @@ public class PupilTimesheetController {
 			TimesheetPupilView tpv = new TimesheetPupilView(pupil.getId(), subject.getName(), (t.getFirstname()+" "+t.getLastname()), split(timesheet.getValue()));
 			tpv_list.add(tpv);
 		}
+		model.addAttribute("ismessge", eventService.chceckMessages(pupil.getId()));
 		model.addAttribute("lenMon", YearMonth.of(year, mon).lengthOfMonth());
 		model.addAttribute("tpv_list", tpv_list);
 		return "pupil/timesheet";

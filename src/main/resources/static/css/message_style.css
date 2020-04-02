@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.ismsg{
+	background-color: red;
+}
+
+.isnmsg{
+	background-color: #5c3566;
+}
+
+.myMsg{
+	background-color: #729fcf;
+}
+
+.NotmyMsg{
+	background-color: #e9b96e;
+}
+
+#contentmsg{
+	width: 300px;
+	height: 50px;
+	resize: none;
+}

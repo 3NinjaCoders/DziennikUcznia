@@ -15,7 +15,8 @@
 	<section id="content">
 	<!-- ********************************************************************************** -->
 		<a  th:href="@{'/teacher/showclass/' + ${idclass}}">Oceny klasy</a>
-		<a  th:href="@{'/teacher/showclass/' + ${idclass}}">Oceny klasy</a>
+		<a  th:href="@{'/teacher/timesheet/' + ${session.teacher.id} + '/' + ${idclass}}">Obecność</a>
+		<a  th:href="@{'/teacher/msglist/' + ${idclass}}">Wiadomości</a>
 	
 		<p th:text="${subject}"></p>
 		<p th:text="${className}"></p>

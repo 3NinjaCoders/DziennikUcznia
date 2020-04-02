@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.dziennik.model.Timetable;
 import com.dziennik.timesheet.Timesheet;
 
 @Repository
@@ -24,4 +23,5 @@ public interface TimesheetRepo extends JpaRepository<Timesheet, Long> {
 														@Param("idteacher") Long idteacher,
 														@Param("mon") int mon,
 														@Param("year") int year);
+	
 }
