@@ -1,17 +1,15 @@
 package com.dziennik.view;
 
-import java.util.List;
-
 public class GradesView {
 
 	private String subject;
-	private List<Double> grades;
+	private String grades;
 	private double average;
 	
 	public GradesView() {
 	}
 
-	public GradesView(String subject, List<Double> grades, double average) {
+	public GradesView(String subject, String grades, double average) {
 		this.subject = subject;
 		this.grades = grades;
 		this.average = average;
@@ -25,11 +23,11 @@ public class GradesView {
 		this.subject = subject;
 	}
 
-	public List<Double> getGrades() {
+	public String getGrades() {
 		return grades;
 	}
 
-	public void setGrades(List<Double> grades) {
+	public void setGrades(String grades) {
 		this.grades = grades;
 	}
 
@@ -44,5 +42,5 @@ public class GradesView {
 	@Override
 	public String toString() {
 		return "GradesView [subject=" + subject + ", grades=" + grades + ", average=" + average + "]";
-	}	
+	}
 }

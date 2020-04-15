@@ -45,32 +45,31 @@ public class PupilGradesController {
 			
 			gv.setSubject(subjectRepo.findById(sid).get().getName());
 			gv.setGrades(extractValues(subjectGrades));
-			gv.setAverage(average(gv.getGrades()));
+			gv.setAverage(average(subjectGrades));
 			
 			grades.add(gv);
 		}
-		
 
-		
 		model.addAttribute("grades", grades);
 		return "pupil/home";
 	}
 	
-	private List<Double> extractValues(List<Grade> grades){
-		List<Double> values = new ArrayList<>();
-		
+	
+	
+	private String extractValues(List<Grade> grades){
+		StringBuilder sb = new StringBuilder();
 		for(Grade g : grades) {
-			values.add(g.getGrade());
+			sb.append(String.valueOf(g.getGrade())+ "  ");
 		}
-		return values; 
+		return sb.toString(); 
 	}
 	
-	private double average(List<Double> grades) {
+	private double average(List<Grade> subjectGrades) {
 		double sum = 0;
-		for(Double d : grades) {
-			sum += d;
+		for(Grade g : subjectGrades) {
+			sum += g.getGrade();
 		}
-		return sum / grades.size();
+		return sum / subjectGrades.size();
 	}
 	
 }
