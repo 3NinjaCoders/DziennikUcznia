@@ -1,0 +1,21 @@
+body{
+    background: url(../img/backgroung.jpg) center center fixed;
+    background-size: cover;
+}
+#webname{
+    font-family: 'Spicy Rice', cursive;
+    text-align: right;
+}
+#loginForm{
+    width: 400px;
+    margin:auto;
+    margin-top: 150px;
+    opacity: 0.9;
+    
+}
+.loginfield{
+    width: 100%;
+    text-align: center;
+}
+.op{
+    opacity: 0.9;
