@@ -1,10 +1,73 @@
-hr{
+hr {
     width: 90%;
 }
-#content{
-    width: 900px;
+
+#content {
+    width: 95%;
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 50px;
+}
+
+#tgrade {
+    width: 600px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin:0;
+}
+.absent{
+    width: 20px;
+    margin: 2px;
+}
+.chat{
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.myMsg{
+    
+    text-align: right;
+    list-style-type: none;
+    
+ 
+}
+.NotmyMsg{
+    
+    text-align: left;
+    list-style-type: none;
+    
+    
+ 
+}
+.dateSize{
+    margin-top: 10px;
+    font-size: 10px;
+}
+.NmM{
+    padding: 5px;
+    border-bottom-right-radius: 15px;
+    background-color: #99ffff; 
+}
+.mM{
+    padding: 5px;
+    border-top-left-radius: 15px;
+    background-color: #99ff99;
+}
+.fromName{
+    font-size: 15px;
+    font-weight: 600;
+}
+.msgInput{
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }

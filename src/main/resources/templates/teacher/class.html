@@ -1,51 +1,99 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+
 <head>
-<meta charset="UTF-8">
-<title th:text="#{appName}"></title>
-<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DzienniczekUcznia-Witaj młody człowieku</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Spicy+Rice&display=swap" rel="stylesheet">
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/87cfb0cc30.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </head>
 
-<style> /* TESTOWO */
-
-</style>
 <body>
-	<nav th:replace="teacher/fragments/top :: top"></nav>
-	
-	<section id="content">
-	<!-- ********************************************************************************** -->
-		<a  th:href="@{'/teacher/showclass/' + ${idclass}}">Oceny klasy</a>
-		<a  th:href="@{'/teacher/timesheet/' + ${session.teacher.id} + '/' + ${idclass}}">Obecność</a>
-		<a  th:href="@{'/teacher/msglist/' + ${idclass}}">Wiadomości</a>
-	
-		<p th:text="${subject}"></p>
-		<p th:text="${className}"></p>
-	
-		<table>
-			<tr>
-				
-			</tr>
-			<tr th:each="i : ${allPupils}">
-				<td th:text="${i.name}"></td>
-				<td th:text="${i.grades}"></td>
-				<td th:text="${i.average}"></td>
-				<td>
-					<form th:action="@{/teacher/showclass}" method="post">
-						<input type="hidden" id="idpupil" name="idpupil" th:value="${i.idpupil}">
-						<input type="hidden" id="idsubject" name="idsubject" th:value="${idsubject}">
-						<input type="hidden" id="idclass" name="idclass" th:value="${idclass}">
-						<input type="number" id="grade" name="grade" min="1" max="5" step="0.5" required>
-						<button type="submit">Dodaj</button>
-					</form>
-				</td>
-				
-			</tr>
-		</table>
-	<!-- ********************************************************************************** -->
-	</section>
-	
-	<aside id="rightmenu" th:replace="teacher/fragments/rightmenu :: rightmenu"></aside>
-	<aside id="servicemap" th:replace="teacher/fragments/servicemap :: servicemap"></aside>
-	<footer th:replace="teacher/fragments/footer :: footer"></footer>
+    <header>
+        <nav class="navbar bg-transparent navbar-expand-md text-primary">
+            <a class="navbar-brand" href='#'><img src="/img/Logo.png" height="50" class="d-inline-block mr-2 align-bottom"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="menu">
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/teacher/timesheetall}"> <i class="fas fa-list-ol"></i> Lista Obecności</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/teacher/home}"> <i class="fas fa-house-user"></i> Strona Głowna</a>
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+            <div>
+                <a th:href="@{/logout}"> <i class="fas fa-user-lock"></i> Wyloguj </a><span th:text="${session.teacher.firstname}"> </span> <span th:text="${session.teacher.lastname}"></span></div>
+
+        </nav>
+        <hr>
+    </header>
+    <div class="contrainer" id="content">
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center" th:if="${ismessge}" style="color:red; font-weight:bold"> <i class="fas fa-envelope-open-text"></i> Masz nową wiadomość</p><br>
+                <div class="text-center">
+                    <a th:href="@{'/teacher/showclass/' + ${idclass}}"> <i class="fas fa-award" style="color:#FF0000"></i> Oceny klasy </a>
+                    <a th:href="@{'/teacher/timesheet/' + ${session.teacher.id} + '/' + ${idclass}}"> <i class="far fa-chart-bar" style="color:#7fe72e"></i> Obecność </a>
+                    <a th:href="@{'/teacher/msglist/' + ${idclass}}"> <i class="far fa-comments" style="color:#ffdb00"></i> Wiadomości </a>
+                    <hr>
+
+                    <h1 th:text="${subject}"></h1>
+                    <h5 th:text="${className}"></h5>
+
+                    <table id="tgrade" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col"> Uczeń </th>
+                                <th scope="col"> Oceny </th>
+                                <th scope="col"> Średnia </th>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="i : ${allPupils}">
+                                <td th:text="${i.name}"></td>
+                                <td th:text="${i.grades}"></td>
+                                <td th:text="${i.average}"></td>
+                                <td>
+                                    <form th:action="@{/teacher/showclass}" method="post">
+                                        <input type="hidden" id="idpupil" name="idpupil" th:value="${i.idpupil}">
+                                        <input type="hidden" id="idsubject" name="idsubject" th:value="${idsubject}">
+                                        <input type="hidden" id="idclass" name="idclass" th:value="${idclass}">
+                                        <input type="number" id="grade" name="grade" min="1" max="5" step="0.5" required>
+                                        <button type="submit">Oceń</button>
+                                    </form>
+                                </td>
+                                
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer text-center"> Copyright &copy All rights reserved 2020 3NinjaCoders</footer>
 </body>
+
 </html>

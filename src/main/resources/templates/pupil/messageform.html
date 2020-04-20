@@ -1,45 +1,93 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+
 <head>
-<meta charset="UTF-8">
-<title th:text="#{appName}"></title>
-<link rel="stylesheet" type="text/css" href="/css/main_style.css" />
-<link rel="stylesheet" type="text/css" href="/css/message_style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DzienniczekUcznia-Witaj młody człowieku</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Spicy+Rice&display=swap" rel="stylesheet">
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/87cfb0cc30.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </head>
 
-<style> /* TESTOWO */
-
-</style>
 <body>
-	<nav th:replace="pupil/fragments/top :: top"></nav>
-	
-	<section id="content">
-	<!-- ********************************************************************************** -->
-	
-		<p ><span>Rozmowa z: </span><span th:text="${teacherName}"></span></p>
-		<form th:action="@{/pupil/message}" method="post">
-			<label for="msg">Treść</label>
-			<textarea id="contentmsg" name="msg" required></textarea><br>
-			<input type="hidden" name="toid" th:value="${idteacher}">
-			<button type="submit">Wyślij</button>
-		</form>
-		
-		<table>
-			<tr th:each="i : ${chat}">
-				<td th:if="${i.fromid == me}" class="myMsg" th:text="${i.timestampmsg}"></td>
-				<td th:unless="${i.fromid == me}" class="NotmyMsg" th:text="${i.timestampmsg}"></td>
-				<td th:if="${i.fromid == me}" class="myMsg">Me</td>
-				<td th:unless="${i.fromid == me}" class="NotmyMsg" th:text="${pupilName}"></td>
-				<td th:if="${i.fromid == me}" class="myMsg" th:text="${i.msg}"></td>
-				<td th:unless="${i.fromid == me}" class="NotmyMsg" th:text="${i.msg}"></td>
-			</tr>
-		</table>
-	
-	<!-- ********************************************************************************** -->
-	</section>
-	
-	<aside th:replace="pupil/fragments/rightmenu :: rightmenu"></aside>
-	<aside th:replace="pupil/fragments/servicemap :: servicemap"></aside>
-	<footer th:replace="pupil/fragments/footer :: footer"></footer>
-</body>
-</html>
+    <header>
+        <nav class="navbar bg-transparent navbar-expand-md text-primary">
+            <a class="navbar-brand" href='#'><img src="/img/Logo.png" height="50" class="d-inline-block mr-2 align-bottom"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="menu">
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/pupil/home}"><i class="fas fa-award" style="color:#FF0000"></i> Oceny </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/pupil/timesheet}"><i class="far fa-chart-bar" style="color:#7fe72e"></i> Obecności </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/pupil/teacherlist}"><i class="far fa-comments" style="color:#ffdb00"></i> Wiadomości </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div>
+                <a th:href="@{/logout}"> <i class="fas fa-user-lock"></i> Wyloguj </a><span th:text="${session.pupil.firstname}"> </span> <span th:text="${session.pupil.lastname}"> </span></div>
+
+        </nav>
+        <hr>
+    </header>
+    <div class="contrainer" id="content">
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center" th:if="${ismessge}" style="color:red; font-weight:bold"> <i class="fas fa-envelope-open-text"></i> Masz nową wiadomość</p><br>
+
+                    <hr>
+
+                    <div class=" col-md-4 chat">
+
+                        <ul th:each="i : ${chat}">
+                            <li th:if="${i.fromid == me}" class="myMsg dateSize" th:text="${i.timestampmsg}"></li>
+
+                            <li th:if="${i.fromid == me}" class="myMsg fromName">Ja</li>
+                            <li th:if="${i.fromid == me}" class="myMsg mM" th:text="${i.msg}"> </li>
+                            <li th:unless="${i.fromid == me}" class="NotmyMsg dateSize" th:text="${i.timestampmsg}"></li>
+                            <li th:unless="${i.fromid == me}" class="NotmyMsg fromName" th:text="${teacherName}"></li>
+
+                            <li th:unless="${i.fromid == me}" class="NotmyMsg NmM" th:text="${i.msg}"></li>
+                        </ul>
+
+                    </div>
+                    
+                    <div class=" col-md-4 chat">
+                        <form th:action="@{/pupil/message}" method="post">
+                            <span class="ml-2 mr-1"><i class="fas fa-edit "></i></span>
+                            <input class="msgInput" type="text" id="contentmsg" name="msg" required>
+                            <input type="hidden" name="toid" th:value="${idteacher}">
+                        
+                            <button type="submit">Wyślij</button>
+                        </form>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer text-center"> Copyright &copy All rights reserved 2020 3NinjaCoders</footer>
+</body></html>
