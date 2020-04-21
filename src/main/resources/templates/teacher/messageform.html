@@ -53,10 +53,6 @@
             <div class="col-12">
                 <p class="text-center" th:if="${ismessge}" style="color:red; font-weight:bold"> <i class="fas fa-envelope-open-text"></i> Masz nową wiadomość</p><br>
                 <div class="text-center">
-                    <a th:href="@{'/teacher/showclass/' + ${idclass}}"> <i class="fas fa-award" style="color:#FF0000"></i> Oceny klasy </a>
-                    <a th:href="@{'/teacher/timesheet/' + ${session.teacher.id} + '/' + ${idclass}}"> <i class="far fa-chart-bar" style="color:#7fe72e"></i> Obecność </a>
-                    <a th:href="@{'/teacher/msglist/' + ${idclass}}"> <i class="far fa-comments" style="color:#ffdb00"></i> Wiadomości </a>
-
 
                     <hr>
 

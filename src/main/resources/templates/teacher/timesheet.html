@@ -70,7 +70,7 @@
 					
 				    <td th:each="x : ${i.value}">
 					
-						<input class="absent"   name="value" type="number"  th:value="${x}">
+						<input class="absent"   name="value" type="number" min="0" max="2"  th:value="${x}">
                         </td>
 					<td>
 						<input type="hidden" name="idpupil" th:value="${i.idpupil}">

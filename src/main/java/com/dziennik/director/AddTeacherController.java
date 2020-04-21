@@ -53,6 +53,9 @@ public class AddTeacherController {
 	public String addteacher(Teacher teacher, Model model) {
 		UserAuth t = new UserAuth(teacher.getFirstname(), passwordEncoder.encode(teacher.getLastname()), "TEACHER");
 		this.userRepo.save(t);
+		Subject subject = subjectRepo.findById(teacher.getIdsubject()).get();
+		subject.setIdteacher(t.getId());
+		subjectRepo.save(subject);
 		teacher.setId(t.getId());
 		teacherRepo.save(teacher);
 		return "redirect:/director/addteacher";

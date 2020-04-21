@@ -46,7 +46,6 @@ public class TeacherMsgListController {
 			tmv.setTeacherName(t.getFirstname()+ " "+ t.getLastname());
 			tmv.setSubject(subjectRepo.findById(t.getIdsubject()).get().getName());
 			boolean isold = messageRepo.newMessage(t.getId(), me.getId());
-			System.out.println("in pupil: " + isold);
 			tmv.setHasNewMessage(isold ? 1 :0);
 			tmv_list.add(tmv);
 		}
