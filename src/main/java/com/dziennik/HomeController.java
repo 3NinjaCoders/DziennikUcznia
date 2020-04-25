@@ -18,16 +18,28 @@ import com.dziennik.model.UserAuth;
 @Controller
 public class HomeController {
 	
-	@Autowired
 	private UserRepo userAuthRepo;
-	@Autowired
 	private PupilRepo pupilRepo;
-	@Autowired
 	private TeacherRepo teacherRepo;
-	
+	private ResetService resetService;
+
+	@Autowired
+	public HomeController(UserRepo userAuthRepo, PupilRepo pupilRepo, TeacherRepo teacherRepo,
+			ResetService resetService) {
+		this.userAuthRepo = userAuthRepo;
+		this.pupilRepo = pupilRepo;
+		this.teacherRepo = teacherRepo;
+		this.resetService = resetService;
+	}
 
 	@GetMapping("/")
 	public String home() {
+		return "home";
+	}
+	
+	@GetMapping("/reset")
+	public String reset() {
+		resetService.reset();
 		return "home";
 	}
 	

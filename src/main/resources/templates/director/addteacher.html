@@ -71,10 +71,20 @@
                         <select id="idsubject" name="idsubject" required>
                             <option th:each="i : ${freeVacation}" th:value="${i.id}" th:text="${i.name}"></option>
                         </select><br>
-
-                        <button th:if="${message != null}" id="button" type="submit" disabled>Dodaj</button>
-                        <button th:unless="${message != null}" id="button" type="submit">Dodaj</button>
+						<button type="submit">Dodaj</button>
                     </form>
+                    
+                    <div class="albert">
+                            
+                            <h2>Zatrudnieni nauczyciele</h2>
+                            <table class="table table-stiped">
+                                <tr th:each="i, it : ${teacher_list}">
+                                    <td th:text="${it.count}"></td>
+                                    <td th:text="${i.firstname}"></td>
+                                    <td th:text="${i.lastname}"></td>
+                                </tr>
+                            </table>
+                      </div>
                 </div>
 
             </div>

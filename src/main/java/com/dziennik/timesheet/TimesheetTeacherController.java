@@ -82,9 +82,12 @@ public class TimesheetTeacherController {
 	@PostMapping("/teacher/timesheet")
 	public String saveTimesheet(Timesheet ts) {
 		Timesheet timesheet = timesheetrepo.findCurrentMonthPupilAndTeacher(ts.getIdpupil(), ts.getIdteacher(), ts.getMon(), ts.getYear());
+		System.out.println(ts.getValue());
 		String v = ts.getValue();
 		v = v.replaceAll(",", "");
+		System.out.println(v);
 		timesheet.setValue(v);
+		System.out.println(timesheet.getValue());
 		
 		timesheetrepo.save(timesheet);
 		

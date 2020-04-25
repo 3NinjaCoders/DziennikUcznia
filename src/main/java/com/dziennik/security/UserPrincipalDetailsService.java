@@ -19,8 +19,10 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 		UserAuth user = this.userRepo.findByUsername(s);
-		UserAutPrinciple up = new UserAutPrinciple(user);
-		return up;
+	
+		if(user == null)
+			throw new UsernameNotFoundException("username " + s +" doesn't exist");
+		return new UserAutPrinciple(user);
 	}
 	
 }

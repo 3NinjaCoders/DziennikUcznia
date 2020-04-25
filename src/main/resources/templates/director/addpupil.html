@@ -57,25 +57,37 @@
                 <p class="text-center" th:if="${ismessge}" style="color:red; font-weight:bold"> <i class="fas fa-envelope-open-text"></i> Masz nową wiadomość</p>
                 <hr>
 
-                <div class="chat">
-                    <h1>Dodaj Ucznia</h1>
+				<div class="chat">
+					<h1>Dodaj Ucznia</h1>
 
-                    <form th:action="@{/director/addpupil}" method="post">
-			
-			<input class="add" placeholder="Imię" type="text" id="firstname" name="firstname" required><br>
-			
-			<input class="add" placeholder="Nazwisko" type="text" id="lastname" name="lastname" required><br>
-			
-			<label for="idschoolclass">klasa</label>
-			<select id="idschoolclass" name="idschoolclass" required>
-				<option th:each="i : ${allClasses}" th:value="${i.idschoolclass}" th:text="${i.name}"></option>
-			</select><br>
-			
-			<button type="submit">Dodaj</button>
-		</form>
-                </div>
+					<form th:action="@{/director/addpupil}" method="post">
 
-            </div>
+						<input class="add" placeholder="Imię" type="text" id="firstname"
+							name="firstname" required><br> <input class="add"
+							placeholder="Nazwisko" type="text" id="lastname" name="lastname"
+							required><br> <label for="idschoolclass">klasa</label>
+							<p id="message" th:if="${message != null}" th:text="${message}"></p>
+						<select id="idschoolclass" name="idschoolclass" required>
+							<option th:each="i : ${allClasses}" th:value="${i.idschoolclass}"
+								th:text="${i.name}"></option>
+						</select><br>
+
+						<button type="submit">Dodaj</button>
+					</form>
+					<div class="albert">
+
+						<h2>Uczniowie</h2>
+						<table class="table table-stiped">
+							<tr th:each="i, it : ${pupil_list}">
+								<td th:text="${it.count}"></td>
+								<td th:text="${i.firstname}"></td>
+								<td th:text="${i.lastname}"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+			</div>
         </div>
     </div>
     <footer class="footer text-center"> Copyright &copy All rights reserved 2020 3NinjaCoders</footer>
